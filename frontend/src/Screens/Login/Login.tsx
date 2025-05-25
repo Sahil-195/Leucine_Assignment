@@ -90,6 +90,9 @@ const Login = () => {
             Sign Up
           </span>
         </p>
+        <p className="mt-2 text-xs text-center text-gray-500">
+          Note: Backend is deployed on Render. Initial requests may be slow as the server wakes up from idle.
+        </p>
       </div>
     </div>
   );

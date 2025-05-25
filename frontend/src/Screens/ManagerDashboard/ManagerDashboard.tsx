@@ -37,7 +37,7 @@ const ManagerDashboard = () => {
                 </p>
             </div>
 
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="bg-white rounded-lg shadow overflow-visible">
                 <div className="px-6 py-4 border-b border-gray-200">
                     <h2 className="text-xl font-semibold text-gray-900">Pending Requests</h2>
                 </div>
@@ -94,7 +94,7 @@ const ManagerDashboard = () => {
                 </table>
             </div>
 
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="bg-white rounded-lg shadow overflow-visible">
                 <div className="px-6 py-4 border-b border-gray-200">
                     <h2 className="text-xl font-semibold text-gray-900">Not Pending Requests</h2>
                 </div>

@@ -62,7 +62,7 @@ const EmployeeDashboard = () => {
                     <div className="bg-white p-6 rounded-lg shadow">
                         <h3 className="text-lg font-semibold text-gray-700">Pending Requests</h3>
                         <div className="text-3xl font-bold text-yellow-500 mt-2">
-                            {requestsStatus?.approved ? String(requestsStatus?.pending) : 
+                            {requestsStatus?.pending ? String(requestsStatus?.pending) : 
                                 <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin ml-1"></div>
                             }
                         </div>
@@ -78,14 +78,14 @@ const EmployeeDashboard = () => {
                     <div className="bg-white p-6 rounded-lg shadow">
                         <h3 className="text-lg font-semibold text-gray-700">Rejected Requests</h3>
                         <div className="text-3xl font-bold text-red-500 mt-2">
-                            {requestsStatus?.approved ? String(requestsStatus?.rejected) : 
+                            {requestsStatus?.rejected ? String(requestsStatus?.rejected) : 
                                 <div className="w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full animate-spin ml-1"></div>
                             }
                         </div>
                     </div>
                 </div> 
 
-            <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="bg-white rounded-lg shadow overflow-visible">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>
