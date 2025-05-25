@@ -10,36 +10,40 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('Employee');
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const navigate = useNavigate();
 
   const signupHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setIsSigningIn(true);
+    
     try {
-        const response: SignupResponse = await signup({username, email, password, role});
-  
-        setCookieItem('token', response?.token);
-        setCookieItem('roleName', response?.user?.roleName);
-        setCookieItem('username', response?.user?.username);
-  
-        const roleName = response?.user?.roleName;
-  
-        switch (roleName) {
-          case 'Employee':
-            navigate('/request-access')
-            break;
+      const response: SignupResponse = await signup({username, email, password, role});
+      
+      setCookieItem('token', response?.token);
+      setCookieItem('roleName', response?.user?.roleName);
+      setCookieItem('username', response?.user?.username);
+      
+      const roleName = response?.user?.roleName;
+      
+      switch (roleName) {
+        case 'Employee':
+          navigate('/request-access')
+          break;
           case 'Manager':
             navigate('/pending-requests')
             break;
-          case 'Admin':
-            navigate('/create-software')
-            break;
-        }
-      } catch (error) {
-        console.error("Error in Login Handler : ", error);
-      }
-  };
+            case 'Admin':
+              navigate('/create-software')
+              break;
+            }
+          } catch (error) {
+            console.error("Error in Login Handler : ", error);
+          } finally {
+            setIsSigningIn(false); 
+          }
+        };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
@@ -115,9 +119,17 @@ const Signup = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200 cursor-pointer"
+            disabled={isSigningIn}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
-            Create Account
+            {isSigningIn ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                 Creating Account...
+              </>
+            ) : (
+              'Create Account'
+            )}
           </button>
         </form>
         <p className="mt-4 text-sm text-center text-gray-600">
