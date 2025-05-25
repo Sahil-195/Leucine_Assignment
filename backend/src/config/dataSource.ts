@@ -14,6 +14,9 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [User, Software, Request],
+  extra: {
+    family: 4,
+  }
 });
 
 export async function connect() {
