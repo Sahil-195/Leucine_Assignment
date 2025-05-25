@@ -10,10 +10,8 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
     const location = useLocation();
     const isPublicRoute = location.pathname === '/login' || location.pathname === '/signup';
     
-    // If trying to access public routes (login/signup)
     if (isPublicRoute) {
         if (userRole) {
-            // Redirect based on role if user is already logged in
             switch (userRole) {
                 case 'Manager':
                     return <Navigate to="/pending-requests" replace />;
@@ -28,12 +26,10 @@ const AuthGuard = ({ children }: AuthGuardProps) => {
         return <>{children}</>;
     }
 
-    // For protected routes
     if (!userRole) {
         return <Navigate to="/login" replace />;
     }
 
-    // Role-based access control for protected routes
     switch (userRole) {
         case 'Manager':
             if (location.pathname !== '/pending-requests') {

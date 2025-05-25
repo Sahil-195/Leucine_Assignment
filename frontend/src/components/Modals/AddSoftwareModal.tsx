@@ -23,7 +23,6 @@ const AddSoftwareModal = ({ isOpen, onClose, onSubmit }: AddSoftwareModalProps) 
         }
         setError('');
         onSubmit(name, description, selectedAccessLevels);
-        // Reset form
         setName('');
         setDescription('');
         setSelectedAccessLevels([]);
@@ -35,7 +34,7 @@ const AddSoftwareModal = ({ isOpen, onClose, onSubmit }: AddSoftwareModalProps) 
                 ? prev.filter(l => l !== level)
                 : [...prev, level]
         );
-        setError(''); // Clear error when user selects an access level
+        setError(''); 
     };
 
     if (!isOpen) return null;

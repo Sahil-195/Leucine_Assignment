@@ -19,10 +19,8 @@ const AdminDashboard = () => {
     }, [getSoftwares]);
 
     const handleAddSoftware = async (name: string, description: string, accessLevels: string[]) => {
-        // TODO: Implement the API call to add new software
         await addSoftware(name, description, accessLevels);
         setIsModalOpen(false);
-        // Refresh the software list after adding
         const softwares = await getSoftwares();
         setAllSoftwares(softwares);
     };
@@ -36,7 +34,6 @@ const AdminDashboard = () => {
                 </p>
             </div>
 
-            {/* Add New Software Card */}
             <div className="bg-white p-6 rounded-lg shadow">
                 <div className="flex items-center space-x-4">
                     <div 
@@ -52,7 +49,6 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
-            {/* Software Table */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
