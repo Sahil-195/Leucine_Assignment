@@ -6,6 +6,7 @@ import { userSoftwareRequestsStatus } from '../../api/services/requestService';
 import type { softwareRequestsStatusResponse } from '../../api/types/requestService.types'
 import type { Software } from '../../api/types/softwareService.types'
 import { requestAccess } from '../../api/services/requestService';
+import toast from 'react-hot-toast';
 
 
 
@@ -44,8 +45,10 @@ const EmployeeDashboard = () => {
                 accessType,
                 reason
             });
+            toast.success(`Request for ${selectedSoftware?.name} made Successfully`);
 
         } catch (error) {
+            toast.error("Request Unsucessful");
             console.log("Error in Employee dashboard : ", error);
         }
     };

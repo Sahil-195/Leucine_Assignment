@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getCookieItem, removeCookieItem } from '../../Utils/cookiesHelper';
 import { useState } from 'react';
 import { Menu, X, LogOut, ShieldCheck } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -12,6 +13,7 @@ const Sidebar = () => {
         removeCookieItem('token');
         removeCookieItem('roleName');
         removeCookieItem('username');
+        toast.success("Logged Out Successfully");
         navigate('/');
     };
 

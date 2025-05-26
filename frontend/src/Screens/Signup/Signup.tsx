@@ -4,6 +4,8 @@ import { signup } from '../../api/services/authService';
 import { setCookieItem } from '../../Utils/cookiesHelper';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, ChevronDown } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -20,7 +22,8 @@ const Signup = () => {
     
     try {
       const response: SignupResponse = await signup({username, email, password, role});
-      
+      toast.success("Signed Up Successfully");
+
       setCookieItem('token', response?.token);
       setCookieItem('roleName', response?.user?.roleName);
       setCookieItem('username', response?.user?.username);
@@ -39,6 +42,9 @@ const Signup = () => {
               break;
             }
           } catch (error) {
+            if(error instanceof AxiosError) {
+              toast.error(error?.response?.data?.message);
+            }
             console.error("Error in Login Handler : ", error);
           } finally {
             setIsSigningIn(false); 
@@ -64,7 +70,7 @@ const Signup = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               required
             />
           </div>

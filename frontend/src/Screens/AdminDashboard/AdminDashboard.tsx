@@ -4,6 +4,7 @@ import type { AddSoftwareResponse } from '../../api/types/softwareService.types'
 import { addSoftware, getSoftwares } from '../../api/services/softwareService';
 import AddSoftwareModal from '../../components/Modals/AddSoftwareModal';
 import { Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const AdminDashboard = () => {
     const username = getCookieItem('username');
@@ -19,10 +20,15 @@ const AdminDashboard = () => {
     }, [getSoftwares]);
 
     const handleAddSoftware = async (name: string, description: string, accessLevels: string[]) => {
-        await addSoftware(name, description, accessLevels);
-        setIsModalOpen(false);
-        const softwares = await getSoftwares();
-        setAllSoftwares(softwares);
+        try {
+            await addSoftware(name, description, accessLevels);
+            toast.success('Software Added Successfully');
+            setIsModalOpen(false);
+            const softwares = await getSoftwares();
+            setAllSoftwares(softwares);
+        } catch (error) {
+            console.log("Error in Add Sfotware: ", error);
+        }
     };
 
     return (

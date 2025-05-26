@@ -4,6 +4,8 @@ import { login } from '../../api/services/authService';
 import { setCookieItem } from '../../Utils/cookiesHelper';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
+import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,6 +20,7 @@ const Login = () => {
   
     try {
       const response: LoginResponse = await login({username, password});
+      toast.success('Logined Successfully');
 
       setCookieItem('token', response?.token);
       setCookieItem('roleName', response?.user?.roleName);
@@ -37,6 +40,9 @@ const Login = () => {
           break;
       }
     } catch (error) {
+      if(error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message);
+      }
       console.error("Error in Login Handler : ", error);
     } finally {
       setIsLoggingIn(false);
